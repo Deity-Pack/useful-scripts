@@ -1,0 +1,30 @@
+sudo apt install build-essential cmake git pkg-config libgtk-3-dev \
+    libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
+    libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
+    gfortran openexr libatlas-base-dev python3-dev python3-numpy \
+    libtbb2 libtbb-dev libdc1394-22-dev
+
+//firstly install all the above libraries for problemn-free build
+
+
+
+//then make a build fir inside the master cv and then
+
+
+//the second last line is for the contrib_modules, give paths correctly
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_C_EXAMPLES=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_GENERATE_PKGCONFIG=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_build/opencv_contrib/modules \
+    -D BUILD_EXAMPLES=ON ..
+    
+    
+    
+//build env is setup, then
+make -j8  //depending on the number from nproc
+
+sudo make install
+
+python3 -c "import cv2 as lol;print(lol.__version__)"
